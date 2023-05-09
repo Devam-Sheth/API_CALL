@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Weather App</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <script></script>
+</head>
+<body>
+    <h1>Weather App developed by Devam Sheth</h1>
+    <div class="app_card">
+        <div class="location_search">
+            <input type="text" name="searchBar" id="searchBar" placeholder="City Name" spellcheck="false">
+             <button id="weather"><img src="search.png"></button>
+        </div>
+        <div class="weather_info">
+            <img class="weather_icon" src="weather-icon.png">
+            <h2 class="temp">28°C</h2>
+            <h3 class="city">Ahmedabad</h3>
+            <div class="details">
+                <p>Humidity : </p>
+                <p class="humidity">50%</p>
+            </div>
+            <div class="details">
+                <p>Wind Speed : </p>
+                <p class="wind">5 km/hr</p>
+            </div>
+            <div class="details">
+                <p>Feels Like : </p>
+                <p class="feelslike">45°C</p>
+            </div>
+            <div class="details">
+                <p>Condition : </p>
+                <p class="condition">Wet</p>
+            </div>
+        </div>
+    </div>
+    <script> 
+        const searchBar = document.getElementById('searchBar');
+        const searchBtn = document.querySelector("#weather");
+
+        async function weatherInfo(city) {
+            const result = await fetch(`
+http://api.weatherapi.com/v1/current.json?key=39405463c5e74000be4102643230805&q=${city}&aqi=no`);
+            const data = await result.json();
+           
+            console.log(data);
+
+            document.querySelector(".city").innerHTML = data.location.name ;
+            document.querySelector(".temp").innerHTML = Math.round(data.current.temp_c) + " °C" ;
+            document.querySelector(".humidity").innerHTML = data.current.humidity + " %" ;
+            document.querySelector(".wind").innerHTML = data.current.wind_kph + " km/hr" ;
+            document.querySelector(".feelslike").innerHTML = Math.round(data.current.feelslike_c
+ ) + " °C" ;
+            document.querySelector(".condition").innerHTML = data.current.condition.text;
+        }
+        
+
+       searchBtn.addEventListener('click', () => {
+        weatherInfo(searchBar.value);
+        }) 
+
+    </script>
+</body>
+</html>
