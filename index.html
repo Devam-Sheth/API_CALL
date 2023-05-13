@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta http-equiv="Content Secure Policy" content="upgrade-insecure-requests"/>
     <title>Weather App</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
@@ -43,7 +43,7 @@
 
         async function weatherInfo(city) {
             const result = await fetch(`
-http://api.weatherapi.com/v1/current.json?key=39405463c5e74000be4102643230805&q=${city}&aqi=no`);
+https://crossorigin.me/http://api.weatherapi.com/v1/current.json?key=39405463c5e74000be4102643230805&q=${city}&aqi=no`);
             const data = await result.json();
            
             console.log(data);
